@@ -47,10 +47,12 @@ class VideoUtility(object):
     def roll(self):
         self.d_roll = random.uniform(1, 100)
 
-    def video_with_length(self, length):
+    def video_with_length(self, length, randomeffects, motionblur):
         self.logger.info("creating video with length: %f" % length)
         self.load_titles()
         self.target_length = length
+        self.randomeffects = randomeffects
+        self.motionblur = motionblur
         self.load_videos()
         self.outputs = []
         t = 0.00
@@ -147,12 +149,13 @@ class VideoUtility(object):
                 self.videos.append(self.videos[i])
 
     def apply_visualeffects(self, clip):
-        if self.d_roll < 10 or self.d_roll > 94:
-            clip = self.desaturate(clip)
-        if self.d_roll < 20:
-            return self.title(clip)
-        elif self.d_roll > 90:
-            return self.accel(clip)
+        if self.randomeffects:
+            if self.d_roll < 10 or self.d_roll > 94:
+                clip = self.desaturate(clip)
+            if self.d_roll < 20:
+                return self.title(clip)
+            elif self.d_roll > 90:
+                return self.accel(clip)
         return clip
 
     def desaturate(self, clip):
@@ -215,10 +218,9 @@ class VideoUtility(object):
         return CompositeVideoClip([clip, txt_clip])
 
     def write_video_with_length(self, length):
-        cv = vfx.supersample(
-            moviepy.editor.concatenate_videoclips(self.outputs),
-            1,
-            1
-            )
+        cv = moviepy.editor.concatenate_videoclips(self.outputs)
+        if self.motionblur:
+            cv = vfx.supersample(cv, 1, 1)
+            
         print("Video duration is %f" % cv.duration)
         cv.write_videofile(self.tempfile, audio=False)

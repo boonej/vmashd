@@ -14,7 +14,7 @@ def load():
 
     """
     from os import path
-    config_file = path.expanduser('~') + '/.videoautomator.ini'
+    config_file = path.expanduser('~') + '/.vmashd.ini'
 
     if not path.isfile(config_file):
         shutil.copyfile('default_config.ini', config_file)

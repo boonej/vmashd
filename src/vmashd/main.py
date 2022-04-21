@@ -69,7 +69,6 @@ def load_video_clip(vids):
     """
     global _randfx
     video = random.choice(vids)
-    echo(f'video duration is {video.duration} at load_video_clip')
     return vu.video_clip(
         video,
         float(cfg['Video']['MinLength']),

@@ -98,10 +98,8 @@ def get_title(v):
     return CompositeVideoClip([v, txt_clip])
 
 
-def get_fx(v):
-    r = roll()
-
-    if r < 10 or r > 94:
+def get_fx(v, r):
+    if r < 10 or r > 90:
         return vfx.blackwhite(v)
     elif r > 90:
         d = v.duration * random.uniform(0.7, 1.8)
@@ -116,16 +114,16 @@ def get_fx(v):
 
 def video_clip(vid, min, max, fx):
     global titles
-    ht = has_titles()
+    r = roll()
+    ht = r < 20 and has_titles()
     length = round(get_cliplength(ht, min, max), 2)
     start = round(random.uniform(0, vid.duration - length), 2)
-    echo(f'start time: {start}, length: {length}')
     v = vid.subclip(start, start + length)
 
-    # if roll() < 20:
-    #     v = get_title(titles)
-    # if fx:
-    #     v = get_fx(v)
+    if r < 20:
+        v = get_title(v)
+    if fx:
+        v = get_fx(v, r)
 
     return v
 

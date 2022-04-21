@@ -15,11 +15,8 @@ cfg = vconfig.load()
 def load_audio():
     """Loads audio files from directory.
 
-    Returns
-    -------
-    <AudioClip>
-        AudioClip of concatenated audio files.
-
+    :return: concatenated audio files
+    :rtype: moviepy.editor.AudioClip
     """
     global cfg
     afl = au.load_audio(cfg['Audio']['Directory'], cfg['Audio']['Filter'])
@@ -34,11 +31,8 @@ def load_audio():
 def load_videos():
     """Loads an array of video files weighted by length
 
-    Returns
-    -------
-    <array>
-        Array of VideoClips
-
+    :return: List of video clips
+    :rtype: list
     """
     global cfg
     vfl = read_dir(cfg['Video']['Directory'], cfg['Video']['Filter'])
@@ -56,16 +50,11 @@ def load_videos():
 def load_video_clip(vids):
     """Loads a short clip to include in video collage
 
-    Parameters
-    ----------
-    vids : <array>
-        Array of video files.
+    :param vids: list of video files
+    :type vids: list
 
-    Returns
-    -------
-    <VideoClip>
-        A short video clip
-
+    :return: a short video clips
+    :rtype: moviepy.editor.VideoClip
     """
     global _randfx
     video = random.choice(vids)
@@ -79,16 +68,11 @@ def load_video_clip(vids):
 def video_with_duration(duration):
     """Collects video clips until a specified duration is achieved
 
-    Parameters
-    ----------
-    duration : type
-        Description of parameter `duration`.
+    :param duration: targeted length of video
+    :type duration: float
 
-    Returns
-    -------
-    type
-        Description of returned object.
-
+    :return: list of video clips to include in video
+    :rtype: list
     """
     time = 0.0
     vids = load_videos()
@@ -105,6 +89,17 @@ def video_with_duration(duration):
 
 
 def write_video(varray, audio, filepath):
+    """ writes video to file
+
+    :param varray: array of videos
+    :type varray: list
+
+    :param audio: audio file to merge with video
+    :type audio: moviepy.editor.AudioClip
+
+    :param filepath: path to output file
+    :type filepath: string
+    """
     global _blur
     vu.write_videofile(
         varray,

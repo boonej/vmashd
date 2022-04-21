@@ -17,12 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Video Automator'
+project = 'vmashd'
 copyright = '2022, Jonathan Boone'
 author = 'Jonathan Boone'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------

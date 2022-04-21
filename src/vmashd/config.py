@@ -1,5 +1,9 @@
 import configparser
 import shutil
+import click
+from os import path
+
+config_file = path.expanduser('~') + '/.vmashd.ini'
 
 
 def load():
@@ -13,8 +17,7 @@ def load():
         details.
 
     """
-    from os import path
-    config_file = path.expanduser('~') + '/.vmashd.ini'
+    global config_file
 
     if not path.isfile(config_file):
         shutil.copyfile('default_config.ini', config_file)
@@ -22,3 +25,15 @@ def load():
     config = configparser.ConfigParser()
     config.read(config_file)
     return config
+
+
+def show_config():
+    """Displays the location and current configuration of the config file.
+    """
+    global config_file
+    config = load()
+    click.echo(f'The configuration file can be modified at {config_file}')
+    for section in config.sections():
+        click.echo(f'\n[{section}]')
+        for(k, v) in config.items(section):
+            click.echo(f'{k:20}{v}')

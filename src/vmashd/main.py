@@ -81,9 +81,7 @@ def video_with_duration(duration):
         return False
     output = []
     while time < duration:
-        echo(f'current length is {time}')
         v = load_video_clip(vids)
-        echo(f'file duration is {v.duration}')
         time = float(time) + float(v.duration)
         output.append(v)
     return output

@@ -20,14 +20,5 @@ Get started by reading the :doc:`usage` section.
 .. toctree::
 
    usage
-   :maxdepth: 2
-   :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   vmashd

@@ -1,7 +1,7 @@
 Usage
 =====
 
-.. _installation
+.. _installation:
 
 Installation
 ------------
@@ -12,7 +12,7 @@ Install vmashd with pip:
 
   pip install vmashd
 
-.. _configuration
+.. _configuration:
 
 Configuring vmashd for your environment
 ---------------------------------------
@@ -44,7 +44,7 @@ caption on a separate line. Ex:
   beef makes you better
   mooooooo
 
-.. _execution
+.. _execution:
 
 Creating a video mashup
 -----------------------

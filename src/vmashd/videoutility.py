@@ -238,11 +238,10 @@ def write_videofile(v, a, filepath, blur, temp):
     :type temp: string
 
     """
-    temp = path.expanduser(temp)
     # TODO: Implement blur
     if not a:
         cv = moviepy.editor.concatenate_videoclips(v)
-        cv.write_videofile(path.expanduser(filepath), audio=False)
+        cv.write_videofile(filepath, audio=False)
     else:
         if v.duration > a.duration:
             v = v.subclip(0.0, a.duration)
@@ -250,7 +249,7 @@ def write_videofile(v, a, filepath, blur, temp):
         v = vfx.fadeout(v, 5.0)
         echo(f'writing video output to {path}')
         v.write_videofile(
-                    path.expanduser(filepath),
+                    filepath,
                     audio_codec='aac',
                     temp_audiofile=path.join(
                         temp, 'audio.m4a'),

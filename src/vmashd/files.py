@@ -14,8 +14,6 @@ def read_dir(dir, filter):
 
     """
     from fnmatch import fnmatch
-    dir = path.expanduser(dir)
-    echo(dir)
     if not path.exists(dir):
         echo(f'no directory: {dir}')
         return False
@@ -52,7 +50,6 @@ def read_to_array(fp):
     :rtype: list<string>
 
     """
-    fp = path.expanduser(fp)
     if not path.exists(fp):
         echo(f'path does not exist: {fp}')
         return []

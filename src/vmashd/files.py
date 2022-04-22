@@ -3,20 +3,15 @@ from click import echo
 
 
 def read_dir(dir, filter):
-    """Reads files from a directory.
+    """Reads a list of files from a directory filtered by the provided string.
 
-    Parameters
-    ----------
-    dir : <string>
-        Path of directory.
-    filter : <string>
-        Filter for valid files.
+    :param dir: directory path
+    :type dir: string
+    :param filter: a filter string to limit results
+    :type filter: string
+    :return: a list of file paths OR False
+    :rtype: list or False
 
-    Returns
-    -------
-    <array> or False
-        An array of the contents of the directory that match the filter.
-        Returns false if the directory does not exist.
     """
     from fnmatch import fnmatch
     dir = path.expanduser(dir)
@@ -36,18 +31,27 @@ def read_dir(dir, filter):
 
 
 def create_dir(dir):
-    """Creates a directory.
+    """Creates a directory structure if none exists.
 
-    Parameters
-    ----------
-    dir : <string>
-        Path to directory.
+    :param dir: directory path
+    :type dir: string
     """
     echo(f'creating directory: {dir}')
-    makedirs(dir)
+    if not path.exists(dir):
+        makedirs(dir)
+    else:
+        echo('directory exists... skipping')
 
 
 def read_to_array(fp):
+    """Reads the contents of a file to an array (list) seperated by line.
+
+    :param fp: path to file
+    :type fp: string
+    :return: list of the contents of the file
+    :rtype: list<string>
+
+    """
     fp = path.expanduser(fp)
     if not path.exists(fp):
         echo(f'path does not exist: {fp}')

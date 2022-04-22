@@ -6,19 +6,14 @@ from vmashd.files import read_dir
 
 
 def load_audio(p, f):
-    """Reads audio files from a directory and returns an array of AudioClips.
+    """Short summary.
 
-    Parameters
-    ----------
-    p : <string>
-        Path to audio files.
-    f : <string>
-        Filter string to identify audio files.
-
-    Returns
-    -------
-    <array>
-        An array of AudioClips.
+    :param p: directory path
+    :type p: string
+    :param f: file filter
+    :type f: string
+    :return: audio file
+    :rtype: AudioClip
 
     """
     echo('reading audio directory')
@@ -35,15 +30,10 @@ def load_audio(p, f):
 def join_audio(audio):
     """Joins a set of audio clips into a single clip
 
-    Parameters
-    ----------
-    audio : <array>
-        An array of AudioClips.
-
-    Returns
-    -------
-    <AudioClip>
-        A normalized, concatenated audioclip.
+    :param audio: list of audio files
+    :type audio: list
+    :return: a concatenated audio clip
+    :rtype: moviepy.editor.AudioClip
 
     """
     echo('joining audio files')

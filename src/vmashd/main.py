@@ -13,10 +13,11 @@ cfg = vconfig.load()
 
 
 def load_audio():
-    """Loads audio files from directory.
+    """Loads and concatenates audio files from directory.
 
     :return: concatenated audio files
     :rtype: moviepy.editor.AudioClip
+
     """
     global cfg
     afl = au.load_audio(cfg['Audio']['Directory'], cfg['Audio']['Filter'])
@@ -53,7 +54,7 @@ def load_video_clip(vids):
     :param vids: list of video files
     :type vids: list
 
-    :return: a short video clips
+    :return: a short video clip
     :rtype: moviepy.editor.VideoClip
     """
     global _randfx
@@ -112,6 +113,13 @@ def write_video(varray, audio, filepath):
 
 
 def write_tempvideo(varray, filepath):
+    """Writes video to a temporary file
+
+    :param varray: array of clips to write
+    :type varray: list
+    :param filepath: output file path
+    :type filepath: string
+    """
     write_video(varray, False, filepath)
     return
 
@@ -141,6 +149,13 @@ def mash(randfx, blur, filename):
     """Instructs vmashd to create a video collage set to music. The length of
     the is set by concatenating the audio found in the audio directory
     specified in the configuration file.
+
+    :param randfx: determines if effects are applied at random
+    :type randfx: bool
+    :param blur: determines if a blur effect is applied [not implemented]
+    :type blur: bool
+    :param filename: path to output the final file
+    :type filename: string
     """
     global _randfx, _blur, cfg
     _randfx = randfx
@@ -161,19 +176,29 @@ def mash(randfx, blur, filename):
     write_tempvideo(vids, tempfile)
     v = vu.read_videofile(tempfile)
     echo('writing file with audio')
-    filepath = path.join(
-        path.expanduser(cfg['Video']['OutputDirectory']),
-        filename
-        )
-    write_video(v, audio, filepath)
+    write_video(v, audio, path.expanduser(filename))
 
 
-@ click.command()
+@click.command()
 def config():
     """Displays the location and current contents of the config file.
     """
     vconfig.show_config()
 
 
+@click.command()
+def makedirs():
+    """Creates all directories listed in the config file.
+    """
+    global cfg
+    video_dir = cfg['Video']['Directory']
+    audio_dir = cfg['Audio']['Directory']
+    temp_dir = cfg['Environment']['TempDirectory']
+    create_dir(video_dir)
+    create_dir(audio_dir)
+    create_dir(temp_dir)
+
+
 cli.add_command(mash)
 cli.add_command(config)
+cli.add_command(makedirs)

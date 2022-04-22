@@ -6,7 +6,20 @@
 vmashd
 ===========================================
 
+**vmashd** is a command-line tool built on top of the
+`moviepy <https://zulko.github.io/moviepy/>`_ library. It takes subclips from a
+directory of movie files and randomly forms a video set to one or more audio
+files.
+
+Get started by reading the :doc:`usage` section.
+
+.. note::
+
+  This project is under active development.
+
 .. toctree::
+
+   usage
    :maxdepth: 2
    :caption: Contents:
 

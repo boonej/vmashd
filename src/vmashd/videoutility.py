@@ -11,30 +11,37 @@ titles = []
 
 
 def set_titles(t):
-    """Sets value for global titles object
+    """Sets the global titles property
 
-    Parameters
-    ----------
-    t : <array>
-        An array of caption strings.
+    :param t: list of title strings
+    :type t: string
+
     """
     global titles
     titles = t
 
 
 def roll():
-    """Generates a random integer from 0 - 100
+    """Generates a random integer between 0 and 100.
 
-    Returns
-    -------
-    <int>
-        Integer between 0 and 100.
+    :return: random integer between 0 and 100
+    :rtype: int
 
     """
     return random.uniform(0, 100)
 
 
 def file_list(p, f):
+    """Gets a list of video files from the video input directory.
+
+    :param p: path to input directory
+    :type p: string
+    :param f: filter for excluded file types
+    :type f: string
+    :return: a list of the files or False
+    :rtype: list<string> or False
+
+    """
     d = read_dir(p, f)
     if not d:
         echo('no files exist... exiting')
@@ -42,6 +49,16 @@ def file_list(p, f):
 
 
 def load_video(dir, size):
+    """Loads a video and resizes it to the specified size.
+
+    :param dir: list of files
+    :type dir: list<string>
+    :param size: size to resize videos
+    :type size: tuple(float, float)
+    :return: array of video clips
+    :rtype: array<moviepy.editor.VideoClip>
+
+    """
     echo('load video directory')
     video = []
     for f in dir:
@@ -51,6 +68,19 @@ def load_video(dir, size):
 
 
 def weight_videos(v, n, f):
+    """Weights videos according to duration, excluding files whose names match
+    the filter conditions.
+
+    :param v: list of video files
+    :type v: list<moviepy.editor.VideoClip>
+    :param n: list of video file names
+    :type n: list<string>
+    :param f: filter for files to exclude from weighting
+    :type f: string
+    :return: list of video files, weighted by length
+    :rtype: list<moviepy.editor.VideoClip>
+
+    """
     from math import ceil
     from fnmatch import fnmatch
     echo('weighting videos based on length')
@@ -69,15 +99,43 @@ def weight_videos(v, n, f):
 
 
 def has_titles():
+    """Determines if titles are present.
+
+    :return: True if titles are present
+    :rtype: bool
+
+    """
     global titles
     return len(titles) > 0
 
 
 def get_cliplength(titles, min, max):
+    """Gets targeted video clip duration.
+
+    :param titles: whether there will be a title on the clip
+    :type titles: bool
+    :param min: minimum length of clip
+    :type min: float
+    :param max: maximum length of clip
+    :type max: float
+    :return: targeted length of clip
+    :rtype: float
+
+    """
+    if (titles):
+        return random.uniform(2.9, 3.6)
     return random.uniform(min, max)
 
 
 def get_title(v):
+    """Adds a title to a video clip.
+
+    :param v: video clip
+    :type v: moviepy.editor.VideoClip
+    :return: video clip with title applied
+    :rtype: moviepy.editor.VideoClip
+
+    """
     global titles
     if (len(titles) == 0):
         echo('tried applying title but no titles found')
@@ -99,6 +157,17 @@ def get_title(v):
 
 
 def get_fx(v, r):
+    """Creates a video clip with a random video effect applied if a random
+    number falls within range.
+
+    :param v: video clip
+    :type v: moviepy.editor.VideoClip
+    :param r: random number between 0 and 100
+    :type r: int
+    :return: video clip with fx applied if necessary
+    :rtype: moviepy.editor.VideoClip
+
+    """
     if r < 10 or r > 90:
         return vfx.blackwhite(v)
     elif r > 90:
@@ -113,6 +182,20 @@ def get_fx(v, r):
 
 
 def video_clip(vid, min, max, fx):
+    """Creates a video clip from a full length video.
+
+    :param vid: full length video clip
+    :type vid: moviepy.editor.VideoClip
+    :param min: minimum length of clip
+    :type min: float
+    :param max: maximum length of clip
+    :type max: float
+    :param fx: determines if random effects are applied
+    :type fx: bool
+    :return: a video clip with any effects or titles applied
+    :rtype: moviepy.editor.VideoClip
+
+    """
     global titles
     r = roll()
     ht = r < 20 and has_titles()
@@ -129,10 +212,32 @@ def video_clip(vid, min, max, fx):
 
 
 def read_videofile(path):
+    """Reads a video file from a specified path.
+
+    :param path: path to video file
+    :type path: string
+    :return: video clip found at path
+    :rtype: moviepy.editor.VideoClip
+
+    """
     return VideoFileClip(path)
 
 
 def write_videofile(v, a, filepath, blur, temp):
+    """Writes a video to a specified output.
+
+    :param v: video to write
+    :type v: moviepy.editor.VideoClip
+    :param a: audio to merge with video
+    :type a: moviepy.editor.AudioClip
+    :param filepath: output file path
+    :type filepath: string
+    :param blur: determines if blur is applied [not implemented]
+    :type blur: bool
+    :param temp: path to temporary directory
+    :type temp: string
+
+    """
     temp = path.expanduser(temp)
     # TODO: Implement blur
     if not a:

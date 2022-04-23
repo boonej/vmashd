@@ -1,3 +1,19 @@
+```
+
+
+                            _         _
+                           | |       | |
+ __   ___ __ ___   __ _ ___| |__   __| |
+ \ \ / / '_ ` _ \ / _` / __| '_ \ / _` |
+  \ V /| | | | | | (_| \__ \ | | | (_| |
+   \_/ |_| |_| |_|\__,_|___/_| |_|\__,_|
+
+
+
+
+
+```
+
 # vmashd
 
 VMASHD is a tool to create generate video/audio from a set of audio, video, and

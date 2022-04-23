@@ -168,13 +168,13 @@ def mash(randfx, blur, filename):
         return
     echo('writing temp file')
     tempfile = path.join(
-        path.expanduser(cfg['Environment']['TempDirectory']),
+        cfg['Environment']['TempDirectory'],
         'temp.mp4'
         )
     write_tempvideo(vids, tempfile)
     v = vu.read_videofile(tempfile)
     echo('writing file with audio')
-    write_video(v, audio, path.expanduser(filename))
+    write_video(v, audio, filename)
 
 
 @click.command()

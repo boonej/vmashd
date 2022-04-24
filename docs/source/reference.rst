@@ -1,5 +1,5 @@
-vmashd package
-==============
+Developer Reference
+====================
 
 Submodules
 ----------

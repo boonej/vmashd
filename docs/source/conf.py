@@ -20,8 +20,7 @@ sys.path.insert(0, os.path.abspath('../../src/vmashd/'))
 project = 'vmashd'
 copyright = '2022, Jonathan Boone'
 author = 'Jonathan Boone'
-
-# The full version, including alpha/beta/rc tags
+version = '0.1'
 release = '0.1.2'
 
 
@@ -47,6 +46,10 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
+
+html_theme_options = {
+        'analytics_id': 'G-WCY1RRMMHJ'
+    }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

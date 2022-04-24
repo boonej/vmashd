@@ -24,6 +24,8 @@ vmashd
 directory of movie files and randomly forms a video set to one or more audio
 files.
 
+.. _how:
+
 How it works
 -------------
 
@@ -33,11 +35,22 @@ randomly joined together from any video clips in the specified directory to
 match the length of the combined audio. Video files are weighted by length to
 make sure a short clip doesn't appear in a disproportionate amount.
 
+.. _captions:
+
 Captions
 --------
 
 Captions can be added (at random) by providing a text file. Currently no other
 configuration options are provided, but they are planned.
+
+.. note::
+
+  Install `ImageMagick <https://imagemagick.org/index.php>`_ prior to adding
+  captions to your video. Linux and MacOs should identify the libraries without
+  additional configuration. Windows users should reference moviepy's
+  `documentation <https://zulko.github.io/moviepy/install.html#other-optional-but-useful-dependencies>`_.
+
+.. _fx:
 
 Effects
 -------
@@ -45,16 +58,14 @@ Effects
 Random effects can be applied to random video clips. See the :doc:`usage`
 section for more information.
 
-.. note::
-
-  This project is under active development.
-
 
 Contents
 `````````
 
 .. toctree::
 
-   reference
+  usage
 
-   help
+  help
+
+  reference

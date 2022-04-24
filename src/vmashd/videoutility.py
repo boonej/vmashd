@@ -5,6 +5,7 @@ from moviepy.editor import VideoFileClip, CompositeVideoClip, TextClip
 from os import path
 from click import echo
 from vmashd.files import read_dir
+from skimage.filters import gaussian
 
 
 titles = []
@@ -223,6 +224,26 @@ def read_videofile(path):
     return VideoFileClip(path)
 
 
+def blur_image(image):
+    return gaussian(image.astype(float), sigma=2)
+
+
+def blur_video(video):
+    """Applies a soft focus to a video clip.
+
+    :param video: video clip
+    :type video: <moviepy.editor.VideoClip>
+    :return: a blurred video clip
+    :rtype: <moviepy.editor.VideoClip>
+
+    """
+    echo('applying blur effect to video file')
+    blurred = video.fl_image(blur_image)
+    blurred.set_opacity(0.3)
+    comp = CompositeVideoClip([video, blurred])
+    return comp
+
+
 def write_videofile(v, a, filepath, blur, temp):
     """Writes a video to a specified output.
 
@@ -245,6 +266,8 @@ def write_videofile(v, a, filepath, blur, temp):
     else:
         if v.duration > a.duration:
             v = v.subclip(0.0, a.duration)
+        if blur:
+            v = blur_video(v)
         v.audio = a
         v = vfx.fadeout(v, 5.0)
         echo(f'writing video output to {path}')

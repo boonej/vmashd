@@ -1,2 +1,4 @@
 Potential Issues
 ================
+
+ImageMagick

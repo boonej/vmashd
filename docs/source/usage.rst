@@ -1,5 +1,5 @@
-Usage
-=====
+How To Mash
+===========
 
 .. _installation:
 

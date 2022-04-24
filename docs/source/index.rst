@@ -49,8 +49,12 @@ section for more information.
 
   This project is under active development.
 
+
+Contents
+`````````
+
 .. toctree::
 
-   usage
+   reference
 
-   vmashd
+   help

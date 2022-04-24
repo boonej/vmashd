@@ -11,4 +11,4 @@ def test_read_dir_filter_fail():
 
 
 def test_read_dir_pass():
-    assert(len(files.read_dir('./', '*.md')) > 0)
+    assert(len(files.read_dir('./', '*.rst')) > 0)

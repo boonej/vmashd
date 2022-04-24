@@ -28,7 +28,7 @@ def roll():
     :rtype: int
 
     """
-    return random.uniform(0, 100)
+    return random.randint(1, 100)
 
 
 def file_list(p, f):

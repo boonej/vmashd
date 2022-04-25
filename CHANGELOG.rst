@@ -14,6 +14,7 @@ Added
 Changed
 ````````
 - Modified config.py to include configuration settings for captions.
+- Modified default configuration to nest folders.
 
 
 0.1.0

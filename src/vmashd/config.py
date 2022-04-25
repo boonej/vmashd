@@ -14,15 +14,15 @@ def create_config():
     config = configparser.ConfigParser()
     config['Environment'] = {
             'LogLevel': 'Warning',
-            'TempDirectory': path.expanduser('~/va_temp'),
+            'TempDirectory': path.expanduser('~/vmashd/tmp'),
         }
     config['Video'] = {
-            'Directory': path.expanduser('~/va_video'),
+            'Directory': path.expanduser('~/vmashd/video'),
             'Filter': '*.m*',
             'Width': 854,
             'Height': 480,
             'Unweighted': '*uw_*',
-            'Captions': path.expanduser('~/va_video/captions.txt'),
+            'Captions': path.expanduser('~/vmashd/captions.txt'),
             'CaptionVAlign': 'bottom',
             'CaptionHAlign': 'center',
             'CaptionFont': 'Helvetica',
@@ -32,7 +32,7 @@ def create_config():
             'MaxLength': 4.8,
         }
     config['Audio'] = {
-            'Directory': path.expanduser('~/va_audio'),
+            'Directory': path.expanduser('~/vmashd/audio'),
             'Filter': '*.mp3'
         }
 

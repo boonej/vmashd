@@ -90,7 +90,7 @@ a list of fonts available (it will be long) execute:
 Creating a video mashup
 -----------------------
 
-After the configuration is commplete, the rest is pretty simple. You will need:
+After the configuration is complete, the rest is pretty simple. You will need:
 
 1. one or more audio files stored in the audio directory; make sure they will
 not be filtered out by the audio filter string.
@@ -116,3 +116,5 @@ A soft blur can be applied to the length of the video:
 .. code-block:: console
 
   vmash mash -f filepath.mp4 --blur --randfx
+
+.. include:: CHANGELOG.rst

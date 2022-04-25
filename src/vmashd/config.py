@@ -3,7 +3,7 @@ import click
 from os import path
 from click import echo
 
-config_file = path.expanduser('~') + '/.vmashd.ini'
+config_file = path.expanduser('~/.vmashd.ini')
 
 
 def create_config():
@@ -23,6 +23,11 @@ def create_config():
             'Height': 480,
             'Unweighted': '*uw_*',
             'Captions': path.expanduser('~/va_video/captions.txt'),
+            'CaptionVAlign': 'bottom',
+            'CaptionHAlign': 'center',
+            'CaptionFont': 'Helvetica',
+            'CaptionFontsize': 20,
+            'CaptionColor': 'white',
             'MinLength': 0.8,
             'MaxLength': 4.8,
         }

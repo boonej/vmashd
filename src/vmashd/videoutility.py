@@ -10,6 +10,41 @@ from skimage.filters import gaussian
 
 titles = []
 
+caption_props = {
+    'font': 'Font',
+    'fontsize': 20,
+    'halign': 'center',
+    'valign': 'top',
+    'color': 'color'
+}
+
+
+def get_available_fonts():
+    """Gets a list of available fonts for captions.
+
+    :return: list of available fonts
+    :rtype: List
+
+    """
+    return TextClip.list('font')
+
+
+def get_available_colors():
+    """Gets a list of available colors for captions.
+
+    :return: list of available colors
+    :rtype: List
+
+    """
+    return TextClip.list('color')
+
+
+def set_caption_props(props):
+    """Sets global caption property settings
+    """
+    global caption_props
+    caption_props = props
+
 
 def set_titles(t):
     """Sets the global titles property
@@ -138,6 +173,7 @@ def get_title(v):
 
     """
     global titles
+    global caption_props
     if (len(titles) == 0):
         echo('tried applying title but no titles found')
         return v
@@ -146,14 +182,17 @@ def get_title(v):
     cap = titles.pop()
     txt_clip = TextClip(
         cap,
-        method="caption",
-        color='white',
-        size=(600, 60),
-        align="center",
-        font="Keep-Calm-Medium",
+        color=caption_props['color'],
+        fontsize=caption_props['fontsize'],
+        font=caption_props['font'],
         kerning=-2,
         interline=-1
-        ).set_pos('center').set_duration(v.duration)
+        ).set_position(
+            (
+                caption_props['halign'],
+                caption_props['valign']
+                )
+            ).set_duration(v.duration)
     return CompositeVideoClip([v, txt_clip])
 
 

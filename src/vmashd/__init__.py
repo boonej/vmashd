@@ -1,4 +1,4 @@
-__version__ = '0.1.2'
+__version__ = '0.2.0-alpha'
 __author__ = 'Jonathan Boone'
 __summary__ = ' A frivolous tool to create random video/audio from provided '\
     'files.'

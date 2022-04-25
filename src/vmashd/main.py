@@ -136,7 +136,7 @@ def cli():
     )
 @ click.option(
     '--blur/--no-blur',
-    default=True,
+    default=False,
     help='Applies motion blur to resulting video.'
     )
 @click.option(

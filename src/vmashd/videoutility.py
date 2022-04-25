@@ -175,7 +175,6 @@ def get_title(v):
     global titles
     global caption_props
     if (len(titles) == 0):
-        echo('tried applying title but no titles found')
         return v
     echo('applying title effect')
     random.shuffle(titles)
@@ -298,7 +297,6 @@ def write_videofile(v, a, filepath, blur, temp):
     :type temp: string
 
     """
-    # TODO: Implement blur
     if not a:
         cv = moviepy.editor.concatenate_videoclips(v)
         cv.write_videofile(filepath, audio=False)

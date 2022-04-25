@@ -86,6 +86,14 @@ video:
 
   vmashd mashup --randfx --filename ./filepath.mp4
 
+
+A soft blur can be applied to the length of the video:
+
+.. code-block:: console
+
+  vmash mash -f filepath.mp4 --blur --randfx
+
+
 .. _configtricks:
 
 Config File Tricks
@@ -105,3 +113,13 @@ Videos are automatically weighted based on length. This prevents repeated clips
 from a shorter video. The config file allows you to set a filter to select
 videos that should be excluded from weighting. This means that any file matching
 the filter would be weighted as a shorter video despite its length.
+
+Adjusting titles
+`````````````````
+
+Font, position, and color can be modified in the configuration file. To see
+a list of fonts available (it will be long) execute:
+
+.. code-block:: console
+
+  vmashd listfonts

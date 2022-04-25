@@ -20,8 +20,8 @@ sys.path.insert(0, os.path.abspath('../../src/vmashd/'))
 project = 'vmashd'
 copyright = '2022, Jonathan Boone'
 author = 'Jonathan Boone'
-version = '0.1'
-release = '0.1.2'
+version = '0.2'
+release = '0.2.0-alpha'
 
 
 # -- General configuration ---------------------------------------------------

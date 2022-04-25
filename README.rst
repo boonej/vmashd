@@ -27,6 +27,8 @@ files.
 Usage
 =====
 
+.. _installation:
+
 Installation
 ------------
 
@@ -36,6 +38,7 @@ Install vmashd with pip:
 
   pip install vmashd
 
+.. _configuration:
 
 Configuring vmashd for your environment
 ---------------------------------------
@@ -67,6 +70,15 @@ caption on a separate line. Ex:
   beef makes you better
   mooooooo
 
+Font, position, and color can be modified in the configuration file. To see
+a list of fonts available (it will be long) execute:
+
+.. code-block:: console
+
+  vmashd listfonts
+
+
+.. _mashup:
 
 Creating a video mashup
 -----------------------
@@ -82,7 +94,7 @@ If the above conditions are met, execute:
 
 .. code-block:: console
 
-  vmashd mashup --filename ./filepath.mp4
+  vmashd mash --filename ./filepath.mp4
 
 
 Optionally, you can enable video effects to be randomly inserted into the
@@ -90,4 +102,10 @@ video:
 
 .. code-block:: console
 
-  vmashd mashup --randfx --filename ./filepath.mp4
+  vmashd mash --randfx --filename ./filepath.mp4
+
+A soft blur can be applied to the length of the video:
+
+.. code-block:: console
+
+  vmash mash -f filepath.mp4 --blur --randfx

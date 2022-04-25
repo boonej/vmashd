@@ -58,6 +58,8 @@ Effects
 Random effects can be applied to random video clips. See the :doc:`usage`
 section for more information.
 
+A blur effect can be applied across the entire video using the `--blur` option.
+
 
 Contents
 `````````

@@ -13,16 +13,23 @@
 
 
 vmashd
-######
+===========================================
 
 **vmashd** is a command-line tool built on top of the
 `moviepy <https://zulko.github.io/moviepy/>`_ library. It takes subclips from a
 directory of movie files and randomly forms a video set to one or more audio
 files.
 
-.. note::
+.. _how:
 
-  This project is under active development.
+How it works
+-------------
+
+Audio files are concatenated (no crossfade - yet) and normalized to avoid
+differing volume outputs between songs. Short video clips are then (mostly)
+randomly joined together from any video clips in the specified directory to
+match the length of the combined audio. Video files are weighted by length to
+make sure a short clip doesn't appear in a disproportionate amount.
 
 Usage
 =====

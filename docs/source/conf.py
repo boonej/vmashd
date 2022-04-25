@@ -21,7 +21,7 @@ project = 'vmashd'
 copyright = '2022, Jonathan Boone'
 author = 'Jonathan Boone'
 version = '0.2'
-release = '0.2.0-alpha'
+release = '0.2.0'
 
 
 # -- General configuration ---------------------------------------------------

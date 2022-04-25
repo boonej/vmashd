@@ -20,9 +20,8 @@ sys.path.insert(0, os.path.abspath('../../src/vmashd/'))
 project = 'vmashd'
 copyright = '2022, Jonathan Boone'
 author = 'Jonathan Boone'
-
-# The full version, including alpha/beta/rc tags
-release = '0.1.2'
+version = '0.2'
+release = '0.2.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -46,7 +45,11 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_material'
+html_theme = 'sphinx_rtd_theme'
+
+html_theme_options = {
+        'analytics_id': 'G-WCY1RRMMHJ'
+    }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

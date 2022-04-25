@@ -5,9 +5,45 @@ from moviepy.editor import VideoFileClip, CompositeVideoClip, TextClip
 from os import path
 from click import echo
 from vmashd.files import read_dir
+from skimage.filters import gaussian
 
 
 titles = []
+
+caption_props = {
+    'font': 'Font',
+    'fontsize': 20,
+    'halign': 'center',
+    'valign': 'top',
+    'color': 'color'
+}
+
+
+def get_available_fonts():
+    """Gets a list of available fonts for captions.
+
+    :return: list of available fonts
+    :rtype: List
+
+    """
+    return TextClip.list('font')
+
+
+def get_available_colors():
+    """Gets a list of available colors for captions.
+
+    :return: list of available colors
+    :rtype: List
+
+    """
+    return TextClip.list('color')
+
+
+def set_caption_props(props):
+    """Sets global caption property settings
+    """
+    global caption_props
+    caption_props = props
 
 
 def set_titles(t):
@@ -28,7 +64,7 @@ def roll():
     :rtype: int
 
     """
-    return random.uniform(0, 100)
+    return random.randint(1, 100)
 
 
 def file_list(p, f):
@@ -137,22 +173,25 @@ def get_title(v):
 
     """
     global titles
+    global caption_props
     if (len(titles) == 0):
-        echo('tried applying title but no titles found')
         return v
     echo('applying title effect')
     random.shuffle(titles)
     cap = titles.pop()
     txt_clip = TextClip(
         cap,
-        method="caption",
-        color='white',
-        size=(600, 60),
-        align="center",
-        font="Keep-Calm-Medium",
+        color=caption_props['color'],
+        fontsize=caption_props['fontsize'],
+        font=caption_props['font'],
         kerning=-2,
         interline=-1
-        ).set_pos('center').set_duration(v.duration)
+        ).set_position(
+            (
+                caption_props['halign'],
+                caption_props['valign']
+                )
+            ).set_duration(v.duration)
     return CompositeVideoClip([v, txt_clip])
 
 
@@ -223,6 +262,26 @@ def read_videofile(path):
     return VideoFileClip(path)
 
 
+def blur_image(image):
+    return gaussian(image.astype(float), sigma=2)
+
+
+def blur_video(video):
+    """Applies a soft focus to a video clip.
+
+    :param video: video clip
+    :type video: <moviepy.editor.VideoClip>
+    :return: a blurred video clip
+    :rtype: <moviepy.editor.VideoClip>
+
+    """
+    echo('applying blur effect to video file')
+    blurred = video.fl_image(blur_image)
+    blurred.set_opacity(0.3)
+    comp = CompositeVideoClip([video, blurred])
+    return comp
+
+
 def write_videofile(v, a, filepath, blur, temp):
     """Writes a video to a specified output.
 
@@ -238,13 +297,14 @@ def write_videofile(v, a, filepath, blur, temp):
     :type temp: string
 
     """
-    # TODO: Implement blur
     if not a:
         cv = moviepy.editor.concatenate_videoclips(v)
         cv.write_videofile(filepath, audio=False)
     else:
         if v.duration > a.duration:
             v = v.subclip(0.0, a.duration)
+        if blur:
+            v = blur_video(v)
         v.audio = a
         v = vfx.fadeout(v, 5.0)
         echo(f'writing video output to {path}')

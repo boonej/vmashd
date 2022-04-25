@@ -5,6 +5,7 @@ import vmashd.config as vconfig
 import click
 from click import echo
 from os import path
+import vmashd.output as out_p
 import random
 
 _randfx = False
@@ -135,7 +136,7 @@ def cli():
     )
 @ click.option(
     '--blur/--no-blur',
-    default=True,
+    default=False,
     help='Applies motion blur to resulting video.'
     )
 @click.option(
@@ -162,6 +163,15 @@ def mash(randfx, blur, filename):
     if not audio:
         return
     vu.set_titles(read_to_array(cfg['Video']['Captions']))
+
+    props = {
+        'font': cfg['Video']['CaptionFont'],
+        'fontsize': int(cfg['Video']['CaptionFontsize']),
+        'halign': cfg['Video']['CaptionHAlign'],
+        'valign': cfg['Video']['CaptionVAlign'],
+        'color': cfg['Video']['CaptionColor'],
+        }
+    vu.set_caption_props(props)
     vids = video_with_duration(audio.duration)
     if not vids:
         echo('no video files, exiting')
@@ -197,6 +207,17 @@ def makedirs():
     create_dir(temp_dir)
 
 
+@click.command()
+def listfonts():
+    """Lists all available fonts for captions.
+    """
+    list = vu.get_available_fonts()
+
+    for ln in out_p.list_cols(list, 2, 4):
+        echo(ln)
+
+
 cli.add_command(mash)
 cli.add_command(config)
 cli.add_command(makedirs)
+cli.add_command(listfonts)

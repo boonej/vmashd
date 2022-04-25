@@ -1,13 +1,5 @@
-vmashd package
-==============
-
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   vmashd.tests
+Developer Reference
+====================
 
 Submodules
 ----------

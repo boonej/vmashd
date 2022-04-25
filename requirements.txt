@@ -1,1 +1,2 @@
 moviepy
+scikit-image
